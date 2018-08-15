@@ -4,7 +4,9 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
+
 import com.xun.basedao.annotation.DbTable;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,12 +32,11 @@ public class BaseDao<T> implements IBaseDao<T> {
         if (sqLiteDatabase.isOpen() && !isInit) {
             int databaseVersion = sqLiteDatabase.getVersion();
             String slq = getCreateSlq(entityClass);
-            if (databaseVersion < version) {
-                try {
-                    sqLiteDatabase.execSQL("drop table " + tableName);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+            //如果databaseVersion ==0 说明第一次创建不需要删旧表
+            if (databaseVersion != 0 && databaseVersion < version)
+                sqLiteDatabase.execSQL("drop table " + tableName);
+
+            if (databaseVersion == 0 || databaseVersion < version) {
                 sqLiteDatabase.execSQL(slq);
                 sqLiteDatabase.setVersion(version);
             }
