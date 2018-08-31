@@ -1,5 +1,6 @@
 package com.xun.basedao
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,16 +13,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        BaseDaoFactory.getInstance().init(applicationContext,1)
+        BaseDaoFactory.getInstance().init(applicationContext, 1)
     }
 
     fun insert(v: View) {
-        val dao = BaseDaoFactory.getInstance().getBaseDao(UserInfo::class.java)
-        dao?.insert(UserInfo().apply {
-            age = 25
-            name = "李校辉"
-            picHad = "https://github.com/lxhuige/baseDao"
-        })
+//        val dao = BaseDaoFactory.getInstance().getBaseDao(UserInfo::class.java)
+//        dao?.insert(UserInfo().apply {
+//            age = 25
+//            name = "李校辉"
+//            picHad = "https://github.com/lxhuige/baseDao"
+//        })
+        startActivity(Intent(v.context, RecycleViewActivity::class.java))
+
     }
 
     fun update(v: View) {
