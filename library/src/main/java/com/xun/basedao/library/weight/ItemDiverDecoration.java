@@ -39,13 +39,13 @@ public class ItemDiverDecoration extends RecyclerView.ItemDecoration {
         setOrientation(LinearLayoutManager.VERTICAL);
     }
 
-    public ItemDiverDecoration(Context context, int orientation, @DrawableRes int res) {
-        mDrawable = ContextCompat.getDrawable(context, res);
+    public ItemDiverDecoration(Context context, int orientation, @DrawableRes int drawableId) {
+        mDrawable = ContextCompat.getDrawable(context, drawableId);
         setOrientation(orientation);
     }
 
-    public ItemDiverDecoration(Context context, @DrawableRes int res) {
-        this(context, LinearLayoutManager.VERTICAL, res);
+    public ItemDiverDecoration(Context context, @DrawableRes int drawableId) {
+        this(context, LinearLayoutManager.VERTICAL, drawableId);
     }
 
     public void setOrientation(int orientation) {
