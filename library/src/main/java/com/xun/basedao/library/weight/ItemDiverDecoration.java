@@ -11,6 +11,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+/**
+ * recyclerView 分割线
+ */
 public class ItemDiverDecoration extends RecyclerView.ItemDecoration {
 
     private Drawable mDrawable;
@@ -79,7 +82,7 @@ public class ItemDiverDecoration extends RecyclerView.ItemDecoration {
             View child = parent.getChildAt(i);
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
             int left = child.getRight() + params.rightMargin + Math.round(child.getTranslationX());
-            int right = left + mDrawable.getIntrinsicHeight();
+            int right = left + mHeight;
             mDrawable.setBounds(left, top, right, bottom);
             mDrawable.draw(c);
         }
@@ -94,7 +97,7 @@ public class ItemDiverDecoration extends RecyclerView.ItemDecoration {
             View child = parent.getChildAt(i);
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
             int top = child.getBottom() + params.bottomMargin + Math.round(child.getTranslationY());
-            int bottom = top + mDrawable.getIntrinsicHeight();
+            int bottom = top + mHeight;
             mDrawable.setBounds(left, top, right, bottom);
             mDrawable.draw(c);
         }
@@ -123,10 +126,10 @@ public class ItemDiverDecoration extends RecyclerView.ItemDecoration {
     // 获得条目的偏移量(所有的条目都回调用一次该方法)
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        if(mOrientation == LinearLayoutManager.VERTICAL){//垂直
+        if (mOrientation == LinearLayoutManager.VERTICAL) {//垂直
             outRect.set(0, 0, 0, mHeight);
-        }else{//水平
-            outRect.set(0, 0, mHeight, 0 );
+        } else {//水平
+            outRect.set(0, 0, mHeight, 0);
         }
     }
 }
