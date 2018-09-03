@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 //            name = "李校辉"
 //            picHad = "https://github.com/lxhuige/baseDao"
 //        })
-        startActivity(Intent(v.context, RecycleViewActivity::class.java))
+        startActivity(Intent(v.context, HeaderRecycleViewActivity::class.java))
 
     }
 

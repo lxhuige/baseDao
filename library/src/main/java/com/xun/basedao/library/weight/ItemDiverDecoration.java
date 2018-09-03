@@ -11,6 +11,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * recyclerView 分割线
  */
@@ -23,6 +26,20 @@ public class ItemDiverDecoration extends RecyclerView.ItemDecoration {
     private int mOrientation;
     //是否划线
     private boolean isDraw = true;
+
+    //不需要添加分割线的View 例如添加 头部 或 尾部
+    private Set<View> hideView;
+
+    public void addHideView(Set<View> hideView) {
+        this.hideView = hideView;
+    }
+
+    public void addHideView(View hideView) {
+        if (this.hideView == null) {
+            this.hideView = new HashSet<>();
+        }
+        this.hideView.add(hideView);
+    }
 
     /**
      * @param draw false 只占位不划线  ， true 划线
@@ -80,6 +97,7 @@ public class ItemDiverDecoration extends RecyclerView.ItemDecoration {
         int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
             View child = parent.getChildAt(i);
+            if (!isDrawView(child)) continue;
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
             int left = child.getRight() + params.rightMargin + Math.round(child.getTranslationX());
             int right = left + mHeight;
@@ -95,6 +113,7 @@ public class ItemDiverDecoration extends RecyclerView.ItemDecoration {
         int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
             View child = parent.getChildAt(i);
+            if (!isDrawView(child)) continue;
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
             int top = child.getBottom() + params.bottomMargin + Math.round(child.getTranslationY());
             int bottom = top + mHeight;
@@ -126,10 +145,23 @@ public class ItemDiverDecoration extends RecyclerView.ItemDecoration {
     // 获得条目的偏移量(所有的条目都回调用一次该方法)
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+        if (!isDrawView(view)) return;
         if (mOrientation == LinearLayoutManager.VERTICAL) {//垂直
             outRect.set(0, 0, 0, mHeight);
         } else {//水平
             outRect.set(0, 0, mHeight, 0);
         }
+    }
+
+    //添加的头部不需要分割线可以调用此方法
+    private boolean isDrawView(View view) {
+        if (hideView != null) {
+            for (View item : hideView) {
+                if (item == view) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
