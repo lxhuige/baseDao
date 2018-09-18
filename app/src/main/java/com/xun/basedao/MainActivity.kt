@@ -14,6 +14,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         BaseDaoFactory.getInstance().init(applicationContext, 1)
+
+        ProgressBar.setOnClickListener {  startActivity(Intent(this, ProgressBarActivity::class.java)) }
     }
 
     fun insert(v: View) {

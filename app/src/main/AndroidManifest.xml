@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".RecycleViewActivity" />
-        <activity android:name=".HeaderRecycleViewActivity"></activity>
+        <activity android:name=".HeaderRecycleViewActivity" />
+        <activity android:name=".ProgressBarActivity"></activity>
     </application>
 
 </manifest>

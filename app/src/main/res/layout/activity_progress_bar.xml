@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ProgressBarActivity">
+
+    <com.xun.basedao.library.view.ProgressBar
+        android:id="@+id/ProgressBar"
+        android:layout_width="200dp"
+        android:layout_height="200dp" />
+
+    <com.xun.basedao.library.view.SlidingPriceBar
+        android:background="#fff"
+        android:layout_width="wrap_content"
+        android:layout_height="700px"
+        app:price_u="500"
+        app:price_d="200"
+        app:layout_constraintTop_toBottomOf="@+id/ProgressBar" />
+
+</android.support.v7.widget.LinearLayoutCompat>
